@@ -73,9 +73,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        return $product;
-
-        return view('products.edit');
+        return view('products.edit',compact('product', $product));
     }
 
     /**
@@ -87,7 +85,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->save();
+
+        return redirect()->route('product.index');
     }
 
     /**

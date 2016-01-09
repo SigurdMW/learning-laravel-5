@@ -13,4 +13,5 @@
 	]) !!}
 	{!! Form::submit('delete') !!}
 	{!! Form::close()!!}
+	<a href="{{route('product.edit',$product->id)}}">Edit</a>
 @stop
