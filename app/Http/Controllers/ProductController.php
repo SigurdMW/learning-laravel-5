@@ -19,8 +19,9 @@ class ProductController extends Controller
     {
         $products = Product::all();
 
-        return view('products.index')
-            ->with('products', $products);
+        /*return view('products.index')
+            ->with('products', $products);*/
+            return $products;
     }
 
     /**
@@ -59,8 +60,10 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-        return view('products.show')
-            ->with('product', $product);
+
+        /*return view('products.show')
+            ->with('product', $product);*/
+        return $product;
     }
 
     /**

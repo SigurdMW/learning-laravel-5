@@ -26,6 +26,8 @@ Route::get('contact', [
 		'uses' => 'PagesController@getContact'
 ]);
 
+Route::get('articles', 'ArticlesController@index');
+
 Route::resource('product', 'ProductController');
 
 /*
