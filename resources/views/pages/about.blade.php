@@ -5,7 +5,7 @@
 @stop
 
 @section('body')
-    This is about page - {{$name}}</div>
+    This is about page - {{$name}}
     @if($isUserRegistred)
         Hello friend!
     @else

@@ -8,7 +8,6 @@
 	<title>@yield('title')</title>
 	
 	<link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="http://getbootstrap.com/examples/cover/cover.css">
 	
 	<style>
 		.inner.cover {
@@ -19,24 +18,9 @@
 </head>
 
 <body>
-	<div class="site-wrapper">
-		<div class="site-wrapper-inner">
-			<div class="cover-container">
-				<div class="masthead clearfix">
-					<div class="inner">
-						@include('layouts.menu')
-			 		</div>
-          		</div>
-	  			<div class="inner cover">
-        			@yield('body')
-          		</div>
-          		<div class="mastfoot">
-            		<div class="inner">
-              			<p>En utvilkers drøm</p>
-            		</div>
-          		</div>
-          	</div>
-  		</div>
+	@include('layouts.menu')
+	<div class="container">
+		@yield('body')      		
 	</div>
 </div>
 </body>
