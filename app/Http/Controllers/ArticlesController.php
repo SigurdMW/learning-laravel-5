@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use App\Http\Requests\CreateArticleRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -29,10 +29,10 @@ class ArticlesController extends Controller
     	return view('articles.create');
     }
 
-    public function store()
+    public function store(CreateArticleRequest $request)
     {
 
-    	Article::create(Request::all());
+        Article::create($request->all());
 
     	return redirect('articles');
     }
