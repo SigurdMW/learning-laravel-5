@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateArticleRequest;
+use Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -35,5 +35,19 @@ class ArticlesController extends Controller
         Article::create($request->all());
 
     	return redirect('articles');
+    }
+
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('articles.edit', compact('article'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $input = $request::all();
+        $article = Article::findOrFail($id);
+        $article->update($input);
+        return redirect('articles');
     }
 }
