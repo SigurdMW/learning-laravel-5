@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Request;
+use App\Http\Requests\ArticleRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,7 @@ class ArticlesController extends Controller
     	return view('articles.create');
     }
 
-    public function store(CreateArticleRequest $request)
+    public function store(ArticleRequest $request)
     {
 
         Article::create($request->all());
@@ -43,9 +44,9 @@ class ArticlesController extends Controller
         return view('articles.edit', compact('article'));
     }
 
-    public function update($id, Request $request)
+    public function update($id, ArticleRequest $request)
     {
-        $input = $request::all();
+        $input = $request->all();
         $article = Article::findOrFail($id);
         $article->update($input);
         return redirect('articles');

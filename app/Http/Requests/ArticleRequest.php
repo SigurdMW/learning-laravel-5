@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Requests;
-
 use App\Http\Requests\Request;
-
-class CreateArticleRequest extends Request
+class ArticleRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +12,6 @@ class CreateArticleRequest extends Request
     {
         return true; //if true, anyone can make this request (any user)
     }
-
     /**
      * Get the validation rules that apply to the request.
      *

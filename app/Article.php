@@ -11,7 +11,8 @@ class Article extends Model
     	'title',
     	'body',
     	'excerpt',
-    	'published_at'
+    	'published_at',
+        'user_id' //for now its possible to set user_id via the form. NOT TO BE USED IN PRODUCTION!
     ];
 
     protected $dates = ['published_at'];
@@ -26,4 +27,12 @@ class Article extends Model
     {
     	$this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d', $date);
     }
+
+
+    //an article is owned by a user
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 }
