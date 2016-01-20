@@ -9,12 +9,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Article;
 
+use Auth;
+
 use Carbon\Carbon;
 
 class ArticlesController extends Controller
 {
     public function index()
     {
+
     	$articles = Article::latest('updated_at')->where('published_at', '<=',Carbon::now())->get();
     	return view('articles.index',compact('articles'));
     }
@@ -33,7 +36,8 @@ class ArticlesController extends Controller
     public function store(ArticleRequest $request)
     {
 
-        Article::create($request->all());
+        $article = new Article($request->all());
+        Auth::user()->articles()->save($article);
 
     	return redirect('articles');
     }
