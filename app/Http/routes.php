@@ -34,6 +34,10 @@ Route::group(['middleware' => 'web'], function () {
 
 Route::resource('product', 'ProductController');
 
+Route::get('foo', ['middleware' => 'manager', function () {
+    return "MANAGER";
+}]);
+
 /*Route::controllers([
 	'auth' 		=> 'Auth\AuthController',
 	'password' 	=> 'Auth\PasswordController',
@@ -56,7 +60,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+    Route::auth();	
 
     Route::get('/home', 'HomeController@index');
 });
