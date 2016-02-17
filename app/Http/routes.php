@@ -25,24 +25,17 @@ Route::get('contact', [
 		'as' => 'contact',
 		'uses' => 'PagesController@getContact'
 ]);
-
-
-
+Route::get('users/{user}', function(\App\User $user){
+	return $user;
+})->middleware('throttle');
 Route::group(['middleware' => 'web'], function () {
 	Route::resource('articles','ArticlesController');
+	//Route::resource('users','UserController');
 });
+
 
 Route::resource('product', 'ProductController');
 
-Route::get('foo', ['middleware' => 'manager', function () {
-    return "MANAGER";
-}]);
-
-/*Route::controllers([
-	'auth' 		=> 'Auth\AuthController',
-	'password' 	=> 'Auth\PasswordController',
-	]);
-	*/
 
 /*
 |--------------------------------------------------------------------------

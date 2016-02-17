@@ -4,6 +4,14 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+   
+    private $tables = [
+        'users',
+        'articles',
+        'tags',
+        'article_tag',
+    ];
+
     /**
      * Run the database seeds.
      *
@@ -11,6 +19,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserTableSeeder::class);
+        $this->cleanDatabase(); //removes all content
+    	
+        //this recreates dummy data in the database. 
+        $this->call(UsersTableSeeder::class);
+        $this->call(ArticlesTableSeeder::class);
+        $this->call(TagsTableSeeder::class);
+        $this->call(ArticleTagTableSeeder::class);
+        
+    }
+
+    private function cleanDatabase(){
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        foreach ($this->tables as $tableName) {
+            DB::table($tableName)->truncate();
+        };
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }
