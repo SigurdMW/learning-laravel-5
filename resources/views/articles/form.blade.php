@@ -14,5 +14,19 @@
 </div>
 
 <div class="form-group">
+	{!! Form::label('tag_list', 'Tags:') !!}
+	{!! Form::select('tag_list[]', $tags, null, ['class'=>'form-control', 'multiple']) !!}
+</div>
+
+<div class="form-group">
 	{!! Form::submit($submitButtonText, ['class'=>'btn btn-primary']) !!}
 </div>
+
+@section('footer')
+<script type="text/javascript">
+  $('select').select2({
+  	placeholder: "Chose your tags",
+  	//tags: true
+  });
+</script>
+@stop

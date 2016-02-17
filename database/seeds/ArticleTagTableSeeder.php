@@ -19,7 +19,7 @@ class ArticleTagTableSeeder extends Seeder {
 
 		foreach(range(1,30) as $index)
 		{
-			ArticleTag::create([
+			DB::table('article_tag')->insert([
 				'article_id' => $faker->randomElement($article_ids->toArray()),
 				'tag_id'	 => $faker->randomElement($tag_ids->toArray()),
 			]);

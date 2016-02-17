@@ -8,6 +8,7 @@ use App\Http\Requests\ArticleRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Article;
+use App\Tag;
 
 use Auth;
 
@@ -37,22 +38,22 @@ class ArticlesController extends Controller
 
     public function create()
     {
-    	return view('articles.create');
+    	$tags = Tag::lists('name', 'id');
+        return view('articles.create', compact('tags'));
     }
 
     public function store(ArticleRequest $request)
     {
-
-        $article = new Article($request->all());
-        Auth::user()->articles()->save($article);
+        $this->createArticle($request);
 
     	return redirect('articles');
     }
 
     public function edit($id)
     {
+        $tags = Tag::lists('name', 'id');
         $article = Article::findOrFail($id);
-        return view('articles.edit', compact('article'));
+        return view('articles.edit', compact('article','tags'));
     }
 
     public function update($id, ArticleRequest $request)
@@ -60,6 +61,24 @@ class ArticlesController extends Controller
         $input = $request->all();
         $article = Article::findOrFail($id);
         $article->update($input);
+
+        // OLD: $article->tags()->sync($request->input('tag_list'));
+        $this->syncTags($article, $request->input('tag_list')); // NEW
+
         return redirect('articles');
+    }
+
+    private function syncTags(Article $article, array $tags)
+    {
+        $article->tags()->sync($tags);
+    }
+
+    private function createArticle(ArticleRequest $request)
+    {
+        $article = new Article($request->all());
+        $article_id = Auth::user()->articles()->save($article); //returns id of article
+        $this->syncTags($article_id, $request->input('tag_list'));
+
+        return $article_id;
     }
 }
